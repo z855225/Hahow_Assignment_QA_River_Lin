@@ -8,6 +8,7 @@ describe('The Star Wars API Tests', function() {
             expect(episode).to.eq(6)
             const species = response.body.results[0].species
             expect(species).to.have.lengthOf(9)
+            cy.log(`${species.length} different races in episode 6`)
         })
     })
 
