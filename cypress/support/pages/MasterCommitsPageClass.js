@@ -1,9 +1,12 @@
+const masterCommitsPageUrl = `${Cypress.env('hahow_recruit_url')}/commits/master`
+const commitAuthorNames = 'a[class="commit-author user-mention"]'
+
 export class MasterCommitsPage {
     goToMasterCommitsPage() {
-        cy.visit('https://github.com/hahow/hahow-recruit/commits/master')
+        cy.visit(masterCommitsPageUrl)
     }
     verifyLatestCommitAuthor() {
-        cy.get('a[class="commit-author user-mention"]').first().then(function(element) {
+        cy.get(commitAuthorNames).first().then(function(element) {
             cy.log(`The latest commit author is ${element.text()}`)
         })
     }

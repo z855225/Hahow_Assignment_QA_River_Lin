@@ -1,10 +1,17 @@
+const frontendMdPageUrl = `${Cypress.env('hahow_recruit_url')}/blob/master/frontend.md`
+const wireframePictures = [
+    'img[src="/hahow/hahow-recruit/raw/master/assets/hero-list-page.png"]',
+    'img[src="/hahow/hahow-recruit/raw/master/assets/hero-profile-page.png"]'
+]
+
 export class FrontendMdPage {
     goToFrontendMdPage() {
-        cy.visit('https://github.com/hahow/hahow-recruit/blob/master/frontend.md')
+        cy.visit(frontendMdPageUrl)
     }
     verifyWireframePictures() {
-        cy.get('img[src="/hahow/hahow-recruit/raw/master/assets/hero-list-page.png"]').should('be.visible')
-        cy.get('img[src="/hahow/hahow-recruit/raw/master/assets/hero-profile-page.png"]').should('be.visible')
+        wireframePictures.forEach(function(element) {
+            cy.get(element).should('be.visible')
+        })
     }
 }
 export const frontendMdPage = new FrontendMdPage()
