@@ -1,8 +1,10 @@
+import * as api from '../../support/starWarsRestApi'
+
 describe('The Star Wars API Tests', function() {
 
     it('Should have 9 different races in episode 6 "Return of the Jedi"', function () {
         const title = 'Return of the Jedi'
-        cy.request(`https://swapi.dev/api/films?search=${title}`).then((response) => {
+        api.searchFilmByTitle(title).then((response) => {
             expect(response.status).to.eq(200)
             const episode = response.body.results[0].episode_id
             expect(episode).to.eq(6)
@@ -13,7 +15,7 @@ describe('The Star Wars API Tests', function() {
     })
 
     it('Should list titles ordered by episode_id ASC', function () {
-        cy.request('https://swapi.dev/api/films').then((response) => {
+        api.allFilms().then((response) => {
             const films = response.body.results
             const actualResult = ordered_by_episode_id_ASC(films)
             const expectResult = [
@@ -32,7 +34,7 @@ describe('The Star Wars API Tests', function() {
     })
 
     it('Should list all vehicles that max atmosphering speed is over 1000', function () {
-        cy.request('https://swapi.dev/api/vehicles').then((response) => {
+        api.allVehicles().then((response) => {
             const vehicles = response.body.results
             const actualResult = vehicles_that_max_atmosphering_speed_is_over_1000(vehicles)
             const expectResult = [
